@@ -59,7 +59,7 @@ void setup(){
 
 void loop(){
   /*Set analogue input values*/
-  lDetector_v = digitalRead(30);
+  lDetector_v = analogRead(A7);
   rDetector_v = analogRead(rGunDetector);
   fDetector_v = analogRead(frontDetector);
   bDetector_v = analogRead(backDetector);
