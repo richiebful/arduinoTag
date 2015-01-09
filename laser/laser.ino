@@ -32,13 +32,13 @@ int triggerButton = 22;
 int reloadButton = 3;
 
 /*Input Analogue Pin Nos.*/
-int lGunDetector = 48;
+int lGunDetector = 30;
 int rGunDetector = 1;
 int frontDetector = 2;
 int backDetector = 3;
 
 /*Output Pin Nos.*/
-int irLaser = 12;
+int irLaser = 48;
 int visibleLaser = 13;
 
 /*Input Values 
@@ -53,18 +53,17 @@ void setup(){
   pinMode(visibleLaser,  OUTPUT);
   pinMode(triggerButton, INPUT);
   pinMode(reloadButton,  INPUT);
+  pinMode(lGunDetector,  INPUT);
 }
 
 void loop(){
   if (digitalRead(triggerButton) == HIGH){
     Serial.println("Shooting laser");
-    for(int i = 0; i < 100; i++){
-      digitalWrite(irLaser, HIGH);
-      delayMicroseconds(13);
-      lDetector_v = digitalRead(48);
-      digitalWrite(irLaser, LOW);
-      delayMicroseconds(13);
-      Serial.println(lDetector_v, DEC);
-    }
+    digitalWrite(irLaser, HIGH);
+    delayMicroseconds(13);
+    Serial.println(digitalRead(lGunDetector));
+    digitalWrite(irLaser, LOW);
+    delayMicroseconds(13);
   }
+  Serial.println(digitalRead(lGunDetector));
 }
