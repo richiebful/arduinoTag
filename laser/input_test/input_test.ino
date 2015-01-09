@@ -1,4 +1,7 @@
 int sensorPin = 4;
+int healthLevel = 5;
+
+int healthPin = {6, 7, 8, 9, 10);
 
 unsigned long previousMillis;
 unsigned long blinkInterval = 500;
@@ -19,6 +22,7 @@ void loop(){
   if (total/7.0 < 200){
     for (int i = 0; i < 10; i ++){
       blinkLed();
+      healthLevel -= 1;
     }
   }
 //  for (int i = 0; i < 20; i ++){
@@ -34,6 +38,15 @@ void loop(){
 //  if (shot_f > 2){
 //    Serial.println("Fire"); 
 //  }
+}
+
+void dispHealth(){
+  for (int i = 0; i < healthLevel; i++){
+    digitalWrite(healthPin[i], HIGH);
+  }
+  for (int i = healthLevel; i < 5; i++){
+    digitalWrite(healthPin[i], LOW);
+  }
 }
 
 void blinkLed(){
