@@ -1,7 +1,9 @@
 int sensorPin = 4;
 int healthLevel = 5;
+int blinkState = LOW;
+int blinkPin = 11;
 
-int healthPin = {6, 7, 8, 9, 10);
+int healthPin[5] = {6, 7, 8, 9, 10};
 
 unsigned long previousMillis;
 unsigned long blinkInterval = 500;
@@ -15,6 +17,7 @@ void loop(){
   int bitStore[20];
   unsigned int total = 0;
   int datum;
+  dispHealth();
   for (int i = 0; i < 7; i++){
     datum = pulseIn(sensorPin, LOW);
     total += datum;
@@ -25,19 +28,6 @@ void loop(){
       healthLevel -= 1;
     }
   }
-//  for (int i = 0; i < 20; i ++){
-//    total += bitStore[i]; 
-//  }
-//  Serial.println(total/20.0);
-//  if (total/20.0 < 2000 && total/20.0 > 1000){
-//    shot_f ++;
-//  }  
-//  else{
-//    shot_f = 0; 
-//  }
-//  if (shot_f > 2){
-//    Serial.println("Fire"); 
-//  }
 }
 
 void dispHealth(){
@@ -57,14 +47,14 @@ void blinkLed(){
    previousMillis = currentMillis;   
 
     // if the LED is off turn it on and vice-versa:
-   if (ledState == LOW){
-     ledState = HIGH;
+   if (blinkState == LOW){
+     blinkState = HIGH;
    }else{
-   ledState = LOW;
+   blinkState = LOW;
    }
 
    // set the LED with the ledState of the variable:
-   digitalWrite(ledPin, ledState); 
+   digitalWrite(blinkPin, blinkState); 
  }
 }
 
