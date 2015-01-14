@@ -1,3 +1,5 @@
+
+
 /*
 void binary(unsigned char * data, boolean * out){
  int i, j;
@@ -28,11 +30,15 @@ void binary(unsigned char * data, boolean * out){
  */
 
 /*Input Digital Pin Nos.*/
-int triggerButton = 22;
+int triggerButton = 2;
 int reloadButton = 3;
 
 /*Input Analogue Pin Nos.*/
+<<<<<<< HEAD
 int lGunDetector = 30;
+=======
+int lGunDetector = 1;
+>>>>>>> parent of 14e0d7f... testing code
 int rGunDetector = 1;
 int frontDetector = 2;
 int backDetector = 3;
@@ -57,6 +63,7 @@ void setup(){
 }
 
 void loop(){
+<<<<<<< HEAD
   if (digitalRead(triggerButton) == HIGH){
     Serial.println("Shooting laser");
     digitalWrite(irLaser, HIGH);
@@ -66,4 +73,18 @@ void loop(){
     delayMicroseconds(13);
   }
   Serial.println(digitalRead(lGunDetector));
+=======
+  /*Set analogue input values*/
+  lDetector_v = analogRead(A7);
+  rDetector_v = analogRead(rGunDetector);
+  fDetector_v = analogRead(frontDetector);
+  bDetector_v = analogRead(backDetector);
+
+  /*Set digital input values*/
+  trigger_v = digitalRead(triggerButton);
+  reload_v  = digitalRead(reloadButton);
+  
+  Serial.println(lDetector_v, DEC);
+  delay(1);
+>>>>>>> parent of 14e0d7f... testing code
 }

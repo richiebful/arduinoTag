@@ -20,8 +20,10 @@ void loop(){
   //dispHealth();
   for (int i = 0; i < 7; i++){
     datum = pulseIn(sensorPin, LOW);
+    Serial.println(datum);
     total += datum;
  }
+ 
   if (total/7.0 < 200){
     Serial.println("Shots fired");
     /*for (int i = 0; i < 10; i ++){
@@ -31,7 +33,7 @@ void loop(){
     }*/
   }
 }
-
+/*
 void dispHealth(){
   for (int i = 0; i < healthLevel; i++){
     digitalWrite(healthPin[i], HIGH);
@@ -59,5 +61,5 @@ void blinkLed(){
    digitalWrite(blinkPin, blinkState); 
  }
 }
-
+*/
 
