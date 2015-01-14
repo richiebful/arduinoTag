@@ -17,16 +17,18 @@ void loop(){
   int bitStore[20];
   unsigned int total = 0;
   int datum;
-  dispHealth();
+  //dispHealth();
   for (int i = 0; i < 7; i++){
     datum = pulseIn(sensorPin, LOW);
     total += datum;
  }
   if (total/7.0 < 200){
-    for (int i = 0; i < 10; i ++){
+    Serial.println("Shots fired");
+    /*for (int i = 0; i < 10; i ++){
+      
       blinkLed();
       healthLevel -= 1;
-    }
+    }*/
   }
 }
 

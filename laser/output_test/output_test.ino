@@ -11,7 +11,7 @@ int ammo_v = 100;
 void setup(){
   Serial.begin(9600);
   pinMode(trigger_i, INPUT);
-  pinMode(reload_i, INPUT);
+  pinMode(reload_i , INPUT);
   pinMode(led_o    , OUTPUT);
 }
 
