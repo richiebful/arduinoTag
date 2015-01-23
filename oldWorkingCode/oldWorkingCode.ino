@@ -33,7 +33,7 @@ loop()
      life_v = 4; 
     }  
     
-    if (total / 7.0 < 500) {
+    if (total / 7.0 > 100) {
         Serial.println("Shot");
 	life_v--;
         dispLife();
