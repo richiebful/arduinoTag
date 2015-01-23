@@ -29,7 +29,11 @@ loop()
 	total += datum;
     }
     
-    if (total / 7.0 < 600) {
+    if (life_v <= 0){
+     life_v = 4; 
+    }  
+    
+    if (total / 7.0 < 500) {
         Serial.println("Shot");
 	life_v--;
         dispLife();
