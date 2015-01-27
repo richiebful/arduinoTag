@@ -9,6 +9,7 @@ void setup(){
   pinMode(reloadIPin, INPUT);
   pinMode(fireIPin,   INPUT);
   pinMode(firePin,    OUTPUT);
+  pinMode(ammo_vPin, OUTPUT)
 }
 
 void loop(){
@@ -21,4 +22,14 @@ void loop(){
   if (digitalRead(reloadButtonPin) == HIGH){
     clip_v = clip_max;
   }
+  dispAmmo();
+}
+
+void dispAmmo(){
+  if (clip_v <= 0){
+     digitalWrite(ammo_vPin,  HIGH);
+  }
+  else{
+     digitalWrite(ammo_vPin, LOW); 
+  } 
 }
