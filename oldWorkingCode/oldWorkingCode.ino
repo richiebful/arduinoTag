@@ -25,15 +25,15 @@ loop()
     
     for (int i = 0; i < 7; i++) {
 	datum = pulseIn(sensorPin, LOW);
-        //Serial.println(datum);
+        Serial.println(datum);
 	total += datum;
     }
     
     if (life_v <= 0){
-     life_v = 4; 
+     life_v = 5; 
     }  
     
-    if (total / 7.0 < 500) {
+    if (total / 7.0 > 100) {
         Serial.println("Shot");
 	life_v--;
         dispLife();
