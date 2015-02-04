@@ -1,13 +1,13 @@
-int reloadIPin = 5;
-int fireButtonPin = 30;
-int firePin = 41;
+int reloadButtonPin = 53;
+int fireButtonPin = 46;
+int firePin = 43;
 int ammo_vPin = 50;
 int clip_v = 6;
 const int clip_max = 6;
 
 void setup(){
   Serial.begin(9600);
-  pinMode(reloadIPin, INPUT);
+  pinMode(reloadButtonPin, INPUT);
   pinMode(fireButtonPin,   INPUT);
   pinMode(firePin,    OUTPUT);
   pinMode(ammo_vPin, OUTPUT);
@@ -15,17 +15,24 @@ void setup(){
 }
 
 void loop(){
-  if (digitalRead(fireButtonPin)==LOW){
+ dispAmmo ();
+  
+  if (digitalRead(fireButtonPin)== HIGH && clip_v > 0){
+    while (digitalRead(fireButtonPin) == HIGH){}
     Serial.println("Shot");
-    digitalWrite(firePin, HIGH);
-    delay(1000);
     digitalWrite(firePin, LOW);
-   // clip_v--;
+     delay(100); 
+    digitalWrite(firePin, HIGH);
+    clip_v--;
   }
-  /*if (digitalRead(reloadButtonPin) == HIGH){
+  
+  Serial.println(clip_v);
+  
+  if (digitalRead(reloadButtonPin) == HIGH){
+    while (digitalRead(reloadButtonPin) == HIGH){}
     clip_v = clip_max;
-  }*/
-  //dispAmmo();
+  }
+  
 }
 
 void dispAmmo(){
@@ -36,3 +43,4 @@ void dispAmmo(){
      digitalWrite(ammo_vPin, LOW); 
   } 
 }
+
