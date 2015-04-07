@@ -1,4 +1,3 @@
-
 unsigned long   previousMillis;
 unsigned long   blinkInterval = 500;
 int reloadButtonPin = 53;
@@ -13,6 +12,28 @@ int life_v = 4;
 int clip_v = 6;
 const int clip_max = 6;
 
+LiquidCrystal lcd(6, 7, 5, 4, 3, 2);
+byte ammo[8] = {
+	0b00100,
+	0b00100,
+	0b01110,
+	0b01110,
+	0b01110,
+	0b01110,
+	0b01110,
+	0b01110
+};
+byte heart[8] = {
+  0b00000,
+  0b01010,
+  0b11111,
+  0b11111,
+  0b11111,
+  0b01110,
+  0b00100,
+  0b00000
+};
+
 void
 setup()
 {
@@ -26,6 +47,10 @@ setup()
   for (int i = 0; i < 4; i++){
     pinMode(ledPins[i], OUTPUT);
   }
+  
+  lcd.begin(16, 2);
+  lcd.createChar(1, heart);
+  lcd.createChar(0, ammo);
 }
 
 void loop(){
@@ -34,34 +59,34 @@ void loop(){
   unsigned int    total = 0;
   long            datum;
   
-  
-  for (int i = 0; i < 7; i++) {
-	datum = pulseIn(sensorPin, LOW);
-	total += datum;
-  }
+  datum = pulseIn(sensorPin, LOW, 1000);
   
   if (life_v <= 0){
     life_v = 5; 
   }  
   
-  if (total / 7.0 > 100) {
-      Serial.println("Shot");
-      life_v--;
-      delay(500);
+  if (datum > 100) {
+    Serial.println("Shot");
+    life_v--;
+    delay(500);
   } 
   
   if (digitalRead(fireButtonPin)== HIGH && clip_v > 0){
+    Serial.println("Pushed in");
     while (digitalRead(fireButtonPin) == HIGH){}
-    Serial.println("Shot");
+    Serial.println("Fire Button");
     digitalWrite(firePin, LOW); 
     digitalWrite(laser, HIGH);
-    //delay(100); 
+    delay(100); 
     digitalWrite(firePin, HIGH);
     digitalWrite(laser, LOW);
     clip_v--;
   }
   
+  Serial.println("Ammo");
   Serial.println(clip_v);
+  Serial.println("Health");
+  Serial.println(life_v);
   
   if (digitalRead(reloadButtonPin) == HIGH){
     while (digitalRead(reloadButtonPin) == HIGH){}
@@ -71,13 +96,10 @@ void loop(){
    
 
 void dispAmmo(){
-  if (clip_v <= 0){
-     digitalWrite(ammo_vPin,  HIGH);
-  }
-  else{
-     digitalWrite(ammo_vPin, LOW); 
-  } 
-  
+  lcd.setCursor(0,1);
+  for (int i = 0; i < ammo_v; i++){
+    lcd.write((byte) 0);
+  }  
 }
 void dispLife(){
   for (int i = 0; i < life_v; i++){
